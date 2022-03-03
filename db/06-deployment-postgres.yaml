@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-pod
+  labels:
+    app: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        #image: bitnami/postgresql
+        image: postgres:latest
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 5432
+        envFrom:
+          - secretRef:         
+              name: postgres-secret  
+        volumeMounts:
+          - mountPath: /var/lib/postgresql/data
+            name: postgresdb
+          - mountPath: /docker-entrypoint-initdb.d
+            name: script-db
+      volumes:
+      - name: postgresdb
+        persistentVolumeClaim:
+          claimName: postgres-claim
+      - name: script-db
+        configMap:
+          name: postgres-script
+

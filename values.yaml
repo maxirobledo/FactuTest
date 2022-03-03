@@ -1,0 +1,26 @@
+authentik:
+  secret_key: "JXRJwUzDQK7aPMXQOu0h8sNH1j4Y9IcNi+OPuimR8fjzKB/X"
+  # This sends anonymous usage-data, stack traces on errors and
+  # performance data to sentry.beryju.org, and is fully opt-in
+  error_reporting:
+    enabled: false
+  postgresql:
+    password: ""
+
+ingress:
+  enabled: true
+  hosts:
+  - host: 167.99.16.180
+    paths:
+    - path: "/"
+      pathType: Prefix
+
+postgresql:
+  enabled: false
+  postgresqlPassword: "authentik"
+redis:
+  enabled: false
+
+image:
+  repository: ghcr.io/goauthentik/server
+  tag: 2022.1.1

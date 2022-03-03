@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-pod 
+  labels:
+    app: php
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: php
+  template:
+    metadata:
+      labels:
+        app: php
+    spec:
+      containers:
+      - name: php-pod
+        #image: php:apache
+        image: maxirobledo/sigcom:1.0-syrah              
+        #Se toman como referencia los secrets de postgres para declararlos como variables de entorno y así utilizarlos en el fichero index.php
+        envFrom:
+          - secretRef:         
+              name: postgres-secret  
+        #ports:
+        #- containerPort: 8080
+
+
+
+
+
+
+     
+
+
+

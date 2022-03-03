@@ -1,0 +1,30 @@
+Creación y publicación de la imagen php en docker hub
+1. docker login
+
+2. docker build --no-cache -t maxirobledo/sigcom:v1 .
+
+3. docker push maxirobledo/sigcom:v1
+
+
+1. Recrear orquestación de kubernetes: (tanto para la carpte db como en la carpeta app)
+kubectl -n testing apply -f ./
+
+2. Verificar estado del cluster de kubernetes (nodo, pods, services)
+kubectl -n testing get nodes -o wide
+kubectl -n testing get pods -o wide
+kubectl -n testing get svc -o wide
+
+3. Ingresar al pod de postgres y verificar BD
+kubectl -n testing exec -i -t pod_name -- /bin/bash
+psql -U postgres db
+
+4. Crear conexión PGAdmin Postgres
+Nombre de la conexion: Postgres (puede ser cualquiera)
+IP: 10.244.0.211
+Port: 5432
+BD: db
+User: postgres
+Password: postgres
+
+5. Eliminar la orquestación de kubernetes:
+kubectl -n testing delete -f ./
