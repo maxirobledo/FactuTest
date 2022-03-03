@@ -17,13 +17,13 @@ spec:
       containers:
       - name: php-pod
         #image: php:apache
-        image: maxirobledo/sigcom:1.0-syrah              
+        image: maxirobledo/factutest:v1         
         #Se toman como referencia los secrets de postgres para declararlos como variables de entorno y así utilizarlos en el fichero index.php
         envFrom:
           - secretRef:         
               name: postgres-secret  
-        #ports:
-        #- containerPort: 8080
+        ports:
+        - containerPort: 8080
 
 
 
