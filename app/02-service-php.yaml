@@ -5,12 +5,12 @@ metadata:
   #labels:
     #app: php
 spec:
-  #type: NodePort
+  type: NodePort
   selector:
     app: php
   ports:
-    #- port: 8080
-      #nodePort: 30800
-      #targetPort: 80
-    - port: 5678
+    - port: 8080
+      nodePort: 30800
+      targetPort: 80
+    #- port: 5678
 
