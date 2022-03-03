@@ -47,5 +47,3 @@ kubectl -n testing delete -f ./
 ```
 ## Autor
 Maximiliano Robledo
-e-mail: maxirobledo@gmail.com
-https://github.com/maxirobledo
