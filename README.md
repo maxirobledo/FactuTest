@@ -1,8 +1,7 @@
 # FactuTest
-
 FactuTest es una app web de en lenguaje PHP que simula la compra de articulos y emisión de una factura.
 
-## Installación
+## Instalación
 
 1. Creación y publicación de la imagen php en docker hub
 ``` bash
@@ -34,16 +33,12 @@ psql -U postgres db
 5. Crear conexión PGAdmin Postgres
 ```
 Nombre de la conexion: Postgres (puede ser cualquiera)
-IP: 10.244.0.211
+IP: 10.245.139.97
 Port: 5432
-BD: db
+BD: ftdb
 User: postgres
 Password: postgres
 ```
-
-6. Eliminar la orquestación de kubernetes:
-```
-kubectl -n testing delete -f ./
-```
 ## Autor
 Maximiliano Robledo
+
