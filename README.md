@@ -42,3 +42,5 @@ Password: postgres
 ## Autor
 Maximiliano Robledo
 
+## Releases
+FactuTest v1 - March 2022
