@@ -11,8 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          cd /home/maxi/DevOps/kubernetes/
-          cp FactuTest Factu
+          cp /home/maxi/DevOps/kubernetes/ Factu
           echo "Project packaging." > Factu/test.txt
       - name: Upload my artifact
         uses: actions/upload-artifact@v2
