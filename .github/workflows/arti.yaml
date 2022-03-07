@@ -10,11 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          cp /home/maxi/DevOps/kubernetes/ Factu
-          echo "Project packaging." > Factu/test.txt
+      - run: tar -cvf my-pack.tar .
       - name: Upload my artifact
         uses: actions/upload-artifact@v2
         with:
           name: my-artifact 
-          path: Factu
+          path: my-pack.tar
