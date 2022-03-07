@@ -10,9 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: echo "Esto es una mensaje de prueba." > test.txt
+      - run: |
+          cd /home/maxi/DevOps/kubernetes/
+          cp FactuTest Factu
+          echo "Project packaging." > Factu/test.txt
       - name: Upload my artifact
         uses: actions/upload-artifact@v2
         with:
           name: my-artifact 
-          path: test.txt
+          path: Factu
