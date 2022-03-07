@@ -1,0 +1,21 @@
+name: Release manual
+
+on:
+  workflow_dispatch:
+      
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        uses: actions/checkout@v2      
+      - name: Build
+        uses: softprops/action-gh-release@v1
+        #with:
+          #draft: false
+          #prerelease: false
+          #name: ${{ steps.version.outputs.version }}
+          #token: ${{ github.token }}
+
+
+  
