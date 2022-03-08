@@ -39,7 +39,8 @@ jobs:
 
       - name: Build
         uses: softprops/action-gh-release@v1
-        name: "${{ step.semver.outputs.version }}"
+        with:
+          name: "${{ step.semver.outputs.version }}"
 
 
   

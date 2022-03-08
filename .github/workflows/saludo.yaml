@@ -1,11 +1,10 @@
-name: test
+name: Hello world
 on:
   pull_request:
     types: 
       - opened 
       - reopened
-    #branches:
-      #- main
+    
 jobs:
   saludar:
     runs-on: ubuntu-latest
