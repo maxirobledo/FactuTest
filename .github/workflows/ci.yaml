@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:    
+    tags:
+      - "v*.*.*"
+      
+env:
+  DOCKERHUB_REPO: maxirobledo/factutest
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        uses: actions/checkout@v2      
+
+      #- name: Semantic versioning
+        #id: semver
+        #uses: PaulHatch/semantic-version@v4.0.3
+        #with:        
+          #tag_prefix: "v"        
+          #major_pattern: "(MAJOR)"    
+          #minor_pattern: "(MINOR)"    
+          #format: "${major}.${minor}.${patch}-prerelease${increment}"
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and Push to DockerHub
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ env.DOCKERHUB_REPO }}:latest
+
+      - name: Build
+        uses: softprops/action-gh-release@v1
+        #with:
+          #name: "${{ steps.semver.outputs.version }}"
+
+
+  
