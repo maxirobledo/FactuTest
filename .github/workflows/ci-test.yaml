@@ -15,15 +15,10 @@ jobs:
       - name: Test
         uses: actions/checkout@v2      
 
-      #- name: Semantic versioning
-        #id: semver
-        #uses: PaulHatch/semantic-version@v4.0.3
-        #with:        
-          #tag_prefix: "v"        
-          #major_pattern: "(MAJOR)"    
-          #minor_pattern: "(MINOR)"    
-          #format: "${major}.${minor}.${patch}-prerelease${increment}"
-
+      - name: Build
+        id: release
+        uses: softprops/action-gh-release@v1
+        
       - name: Login to DockerHub
         uses: docker/login-action@v1 
         with:
@@ -34,12 +29,9 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ env.DOCKERHUB_REPO }}:latest
+          #tags: ${{ env.DOCKERHUB_REPO }}:latest
+          tagls: ${{ steps.release.tag_name }}
 
-      - name: Build
-        uses: softprops/action-gh-release@v1
-        #with:
-          #name: "${{ steps.semver.outputs.version }}"
 
 
   
