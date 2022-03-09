@@ -23,7 +23,7 @@ jobs:
       - name: Show
         run: |
           echo "TAG = ${{steps.builder.outputs.tag}}"
-          echo "URL = ${{teps.builder.outputs.url}}"
+          echo "URL = ${{steps.builder.outputs.url}}"
           echo "ID VERSION = ${{steps.builder.outputs.id}}"
           echo "UPLOAD URL = ${{steps.builder.outputs.upload_url}}"
 
@@ -39,21 +39,6 @@ jobs:
           #push: true
           #tags: ${{ env.DOCKERHUB_REPO }}:${{ steps.builder.tag_name }}
 
-  printer:
-    needs: creator
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v2      
-      
-      - name: Show
-        run: |
-          echo "DOCKER_REPO =  ${{env.DOCKERHUB_REPO}}"
-          echo "tag         =  ${{env.TAG}} "
-          echo "TAG         =  ${{steps.builder.outputs.tag}}"
-          echo "URL         =  ${{ steps.builder.outputs.url }}"
-          echo "ID VERSION  =  ${{ steps.builder.outputs.id }}"
-          echo "UPLOAD URL  =  ${{ steps.builder.outputs.upload_url }}"
           
           
 
