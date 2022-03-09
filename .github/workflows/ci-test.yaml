@@ -18,17 +18,10 @@ jobs:
       - name: Build
         id: builder
         uses: softprops/action-gh-release@v1
-        if: ${{ !startsWith(github.ref, '')}}
-
-
-      - name: Show
+        #if: ${{ !startsWith(github.ref, '')}}
         run: |
-            echo repo : ${{ env.DOCKERHUB_REPO }}
-            echo GITHUB REF : ${{ github.ref }}
-            echo upload_url : ${{ steps.builder.outputs.upload_url }}
-            echo id realease : ${{ steps.builder.outputs.id }}
-
-
+          echo "tag ${{ github.ref }}"
+            
       #- name: Login to DockerHub
         #uses: docker/login-action@v1 
         #with:

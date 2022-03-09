@@ -1,9 +1,6 @@
 name: CI 
 
-on: 
-  push: 
-    branches:
-    - main
+on: workflow_dispatch
       
 env:
   DOCKERHUB_REPO: maxirobledo/factutest
