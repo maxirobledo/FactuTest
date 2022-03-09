@@ -1,13 +1,10 @@
-name: Test
-
+name: CI
 on:
   push:    
     tags:
       - "v*.*.*"
-      
 env:
   DOCKERHUB_REPO: maxirobledo/factutest
-
 jobs:
   creator:
     runs-on: ubuntu-latest
@@ -18,7 +15,8 @@ jobs:
       - name: Build
         id: builder
         uses: softprops/action-gh-release@v1
-        #if: ${{ !startsWith(github.ref, '')}}
+
+      - name: Show
         run: |
           echo "tag ${{ github.ref }}"
             
