@@ -23,6 +23,7 @@ jobs:
       - name: Show
         run: |
           echo "TAG = ${{github.ref}}"
+          echo "TAG = ${{ github.event.release.tag_name }}"
           echo "URL = ${{steps.builder.outputs.url}}"
           echo "ID VERSION = ${{steps.builder.outputs.id}}"
           echo "UPLOAD URL = ${{steps.builder.outputs.upload_url}}"
