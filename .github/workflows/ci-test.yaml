@@ -18,6 +18,8 @@ jobs:
       - name: Build
         id: builer
         uses: softprops/action-gh-release@v1
+        with:
+          tag_name: github.ref
         env: 
           TAG_RELEASE: tag_name
 
