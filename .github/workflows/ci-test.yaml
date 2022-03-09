@@ -17,8 +17,8 @@ jobs:
 
       - name: Build
         id: builder
-        if: startsWith(github.ref, '')
         uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, '')
 
       - name: Show
         run: |
