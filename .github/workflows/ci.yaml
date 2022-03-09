@@ -1,6 +1,9 @@
 name: CI 
 
-on: workflow_dispatch
+on: 
+  push: 
+    branches:
+    - main
       
 env:
   DOCKERHUB_REPO: maxirobledo/factutest
@@ -17,8 +20,8 @@ jobs:
         uses: PaulHatch/semantic-version@v4.0.3
         with:        
           tag_prefix: "v"        
-          major_pattern: "(MAJOR)"    
-          minor_pattern: "(MINOR)"    
+          major_pattern: "change"    
+          minor_pattern: "feat:"    
           format: "${major}.${minor}.${patch}-prerelease${increment}"
 
       - name: Login to DockerHub
@@ -31,12 +34,18 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: "${{ steps.semver.outputs.version }}"
+          tags: "${{ env.DOCKERHUB_REPO }}:latest, ${{ steps.semver.outputs.version }}"
+
+      #- name: Build
+        #uses: softprops/action-gh-release@v1
+        #with:
+          #name: "${{ steps.semver.outputs.version }}"
 
       - name: Build
-        uses: softprops/action-gh-release@v1
+        uses: ctions/create-release@v1
         with:
-          name: "${{ steps.semver.outputs.version }}"
+          tag_name: "${{ steps.semver.outputs.version }}"
+          release_name: "${{ steps.semver.outputs.version }}"
 
 
   

@@ -18,12 +18,13 @@ jobs:
       - name: Build
         id: builder
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, '')
+        if: ${{ !startsWith(github.ref, '')}}
+
 
       - name: Show
         run: |
             echo repo : ${{ env.DOCKERHUB_REPO }}
-            echo GITHUB REG : ${{ github.ref }}
+            echo GITHUB REF : ${{ github.ref }}
             echo upload_url : ${{ steps.builder.outputs.upload_url }}
             echo id realease : ${{ steps.builder.outputs.id }}
 
