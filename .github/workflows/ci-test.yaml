@@ -18,11 +18,15 @@ jobs:
       - name: Build
         id: builer
         uses: softprops/action-gh-release@v1
+        env: 
+          TAG_RELEASE: tag_name
 
 
       - name: Show
         run: |
             echo repo : ${{ env.DOCKERHUB_REPO }}
+            echo tag release : ${{ env.TAG_RELEASE }}
+            echo GITHUB REG : ${{ github.ref }}
             echo upload_url : ${{ steps.builder.outputs.upload_url }}
             echo id realease : ${{ steps.builder.outputs.id }}
 
