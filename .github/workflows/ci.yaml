@@ -1,48 +1,40 @@
-name: CI 
+name: CI
 
-on: workflow_dispatch
+on:
+  push:    
+    tags:
+      - "v*.*.*"
       
 env:
   DOCKERHUB_REPO: maxirobledo/factutest
 
 jobs:
-  create-release:
+  creator:
     runs-on: ubuntu-latest
     steps:
       - name: Test
         uses: actions/checkout@v2      
 
-      - name: Semantic versioning
-        id: semver
-        uses: PaulHatch/semantic-version@v4.0.3
-        with:        
-          tag_prefix: "v"        
-          major_pattern: "change"    
-          minor_pattern: "feat:"    
-          format: "${major}.${minor}.${patch}-prerelease${increment}"
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v1 
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Build and Push to DockerHub
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: "${{ env.DOCKERHUB_REPO }}:latest, ${{ steps.semver.outputs.version }}"
-
-      #- name: Build
-        #uses: softprops/action-gh-release@v1
-        #with:
-          #name: "${{ steps.semver.outputs.version }}"
-
       - name: Build
-        uses: actions/create-release@v1
-        with:
-          tag_name: "${{ steps.semver.outputs.version }}"
-          release_name: "${{ steps.semver.outputs.version }}"
+        id: builder
+        uses: softprops/action-gh-release@v1
+        #if: ${{ !startsWith(github.ref, '')}}
+        run: |
+          echo "tag ${{ github.ref }}"
+            
+      #- name: Login to DockerHub
+        #uses: docker/login-action@v1 
+        #with:
+          #username: ${{ secrets.DOCKERHUB_USERNAME }}
+          #password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      #- name: Build and Push to DockerHub
+        #uses: docker/build-push-action@v2
+        #with:
+          #push: true
+          #tags: ${{ env.DOCKERHUB_REPO }}:${{ steps.builder.tag_name }}
+          
+
 
 
   
