@@ -9,14 +9,14 @@ env:
   DOCKERHUB_REPO: maxirobledo/factutest
 
 jobs:
-  create-release:
+  creator:
     runs-on: ubuntu-latest
     steps:
       - name: Test
         uses: actions/checkout@v2      
 
       - name: Build
-        id: release
+        #id: release
         uses: softprops/action-gh-release@v1
         
       - name: Login to DockerHub
@@ -29,7 +29,8 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ env.DOCKERHUB_REPO }}:latest, ${{ env.DOCKERHUB_REPO }}:${{ steps.release.tag_name }}
+          tags: ${{ env.DOCKERHUB_REPO }}:latest 
+          #${{ env.DOCKERHUB_REPO }}:${{ steps.release.tag_name }}
           
 
 
