@@ -47,7 +47,7 @@ jobs:
           echo "URL         =  ${{ steps.builder.outputs.url }}"
           echo "ID VERSION  =  ${{ steps.builder.outputs.id }}"
           echo "UPLOAD URL  =  ${{ steps.builder.outputs.upload_url }}"
-          echo "GITHUB REPO =  ${{GITHUB_REPOSITORY}}"
+          
           
 
             
