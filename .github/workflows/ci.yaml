@@ -41,13 +41,14 @@ jobs:
       
       - name: Show
         run: |
-          echo "tag         = " env.TAG
-          echo "TAG         = " ${{ steps.builder.outputs.tag }}
-          echo "URL         = " ${{ steps.builder.outputs.url }}
-          echo "ID VERSION  = " ${{ steps.builder.outputs.id }}
-          echo "UPLOAD URL  = " ${{ steps.builder.outputs.upload_url }}"
-          echo "GITHUB REPO = " $GITHUB_REPOSITORY
-          echo "DOCKER_REPO = " env.DOCKERHUB_REPO
+          echo "DOCKER_REPO =  ${{env.DOCKERHUB_REPO}}"
+          echo "tag         =  ${{env.TAG}} "
+          echo "TAG         =  ${{steps.builder.outputs.tag}}"
+          echo "URL         =  ${{ steps.builder.outputs.url }}"
+          echo "ID VERSION  =  ${{ steps.builder.outputs.id }}"
+          echo "UPLOAD URL  =  ${{ steps.builder.outputs.upload_url }}"
+          echo "GITHUB REPO =  ${{GITHUB_REPOSITORY}}"
+          
 
             
      
