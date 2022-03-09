@@ -1,10 +1,6 @@
 name: CI 
 
 on: workflow_dispatch
-
-  #push:    
-    #tags:
-     # - "v*.*.*"
       
 env:
   DOCKERHUB_REPO: maxirobledo/factutest
