@@ -19,6 +19,13 @@ jobs:
           name: "$maxi"
         env:
           TAG: "steps.builder.tag_name"
+        
+      - name: Show
+        run: |
+          echo "TAG = ${{steps.builder.outputs.tag}}"
+          echo "URL = ${{teps.builder.outputs.url}}"
+          echo "ID VERSION = ${{steps.builder.outputs.id}}"
+          echo "UPLOAD URL = ${{steps.builder.outputs.upload_url}}"
 
       #- name: Login to DockerHub
         #uses: docker/login-action@v1 
