@@ -22,8 +22,9 @@ jobs:
 
       - name: Show
         run: |
-            echo ${{ env.DOCKERHUB_REPO }}
-            echo ${{ steps.builder.tag_name }}
+            echo repo : ${{ env.DOCKERHUB_REPO }}
+            echo upload_url : ${{ steps.builder.outputs.upload_url }}
+            echo id realease : ${{ steps.builder.outputs.id }}
 
 
       #- name: Login to DockerHub
