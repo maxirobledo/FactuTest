@@ -18,18 +18,25 @@ jobs:
       - name: Build
         id: builer
         uses: softprops/action-gh-release@v1
-        
-      - name: Login to DockerHub
-        uses: docker/login-action@v1 
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and Push to DockerHub
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: ${{ env.DOCKERHUB_REPO }}:${{ steps.builder.tag_name }}
+
+      - name: Show
+        run: |
+            echo ${{ env.DOCKERHUB_REPO }}
+            echo ${{ steps.builder.tag_name }}
+
+
+      #- name: Login to DockerHub
+        #uses: docker/login-action@v1 
+        #with:
+          #username: ${{ secrets.DOCKERHUB_USERNAME }}
+          #password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      #- name: Build and Push to DockerHub
+        #uses: docker/build-push-action@v2
+        #with:
+          #push: true
+          #tags: ${{ env.DOCKERHUB_REPO }}:${{ steps.builder.tag_name }}
           
 
 
