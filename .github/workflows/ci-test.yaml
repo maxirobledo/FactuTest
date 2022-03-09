@@ -16,10 +16,10 @@ jobs:
         uses: actions/checkout@v2      
 
       - name: Build
-        id: builer
+        id: builder
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: github.ref
+          tag_name: "github.ref"
         env: 
           TAG_RELEASE: tag_name
 
