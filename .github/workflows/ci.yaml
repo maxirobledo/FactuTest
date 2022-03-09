@@ -28,6 +28,10 @@ jobs:
           echo "ID VERSION = ${{steps.builder.outputs.id}}"
           echo "UPLOAD URL = ${{steps.builder.outputs.upload_url}}"
 
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+
       #- name: Login to DockerHub
         #uses: docker/login-action@v1 
         #with:
