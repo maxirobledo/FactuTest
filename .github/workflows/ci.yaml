@@ -15,8 +15,10 @@ jobs:
       - name: Build
         id: builder
         uses: softprops/action-gh-release@v1
+        with:
+          name: "$maxi"
         env:
-          TAG: "tag"
+          TAG: steps.builder.tag_name
 
       #- name: Login to DockerHub
         #uses: docker/login-action@v1 
