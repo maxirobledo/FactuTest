@@ -22,7 +22,7 @@ jobs:
         
       - name: Show
         run: |
-          echo "TAG = ${{steps.builder.outputs.tag}}"
+          echo "TAG = ${{github.ref}}"
           echo "URL = ${{steps.builder.outputs.url}}"
           echo "ID VERSION = ${{steps.builder.outputs.id}}"
           echo "UPLOAD URL = ${{steps.builder.outputs.upload_url}}"
