@@ -33,7 +33,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{env.DOCKERHUB_REPO}}:${{env.TAG}}
+          tags: ${{env.DOCKERHUB_REPO}}:$TAG
           
 
             
