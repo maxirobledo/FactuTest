@@ -19,10 +19,11 @@ jobs:
 
       - name: Show
         run: |
-          echo "GITHUB_REF ${GITHUB_REF}"
-          echo "TAG ${GITHUB_REF/ref\tags\//}"
-          echo 4 - ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
           echo "1 - ${GITHUB_REF##*/}"
+          echo "2 - ${GITHUB_REF}"
+          echo "3 - ${GITHUB_REF/ref\tags\//}"
+          echo 4 - ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+          
 
       - name: Docker meta
         id: metadata
@@ -30,7 +31,7 @@ jobs:
         with:
           images: ${{env.DOCKERHUB_REPO}}
           #tags: v0.1.0
-          tags: ${GITHUB_REF/refs\/tags\//}
+          tags: ${GITHUB_REF##*/}
 
       - name: Login to DockerHub
         uses: docker/login-action@v1 
