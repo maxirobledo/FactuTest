@@ -15,10 +15,6 @@ jobs:
       - name: Build
         id: builder
         uses: softprops/action-gh-release@v1
-        with:
-          name: "$maxi"
-        env:
-          TAG: "steps.builder.tag_name"
         
       - name: Show
         run: |
@@ -28,10 +24,7 @@ jobs:
           echo "ID VERSION = ${{steps.builder.outputs.id}}"
           echo "UPLOAD URL = ${{steps.builder.outputs.upload_url}}"
           echo "::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}"
-          echo "${GITHUB_REF##*/}"
-          echo "::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)"
-          echo "${{ steps.get_version.outputs.VERSION }}"
-          echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+       
 
 
       #- name: Login to DockerHub
