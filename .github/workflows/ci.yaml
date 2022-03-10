@@ -17,15 +17,12 @@ jobs:
         id: builder
         uses: softprops/action-gh-release@v1
 
-      - name: Generator
-        id: gen_tags
-        run: |
-          if [[ $GITHUB_REF == 'refs/tags/'* ]]; then
-            TAGS='["user/image:latest","user/image:'${GITHUB_REF/refs\/tags\//}'"]'
-          else
-            TAGS='["user/image:latest"]'
-          fi
-          echo '::set-output name=tags::'$TAGS
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: maxirobledo/factutest
+          tags: ${GITHUB_REF/refs\/tags\//}
     
       #- name: Show
         #run: |
@@ -45,6 +42,6 @@ jobs:
           context: .
           push: true
           #tags: ${{env.DOCKERHUB_REPO}}:$TAG
-          tags: ${{ fromJson(steps.gen_tags.outputs.tags) }}
+          tags: ${{ steps.meta.outputs.tags }}
     
      
