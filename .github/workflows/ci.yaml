@@ -33,7 +33,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{env.DOCKERHUB_REPO}}:latest
+          tags: ${{env.DOCKERHUB_REPO}}/factutest:v0.1.0
           
           
 
