@@ -16,34 +16,22 @@ jobs:
         id: builder
         uses: softprops/action-gh-release@v1
         
-      - name: Show
-        run: |
-          echo "TAG = ${{github.ref}}"
-          echo "TAG = ${{ github.event.release.tag_name }}"
-          echo "URL = ${{steps.builder.outputs.url}}"
-          echo "ID VERSION = ${{steps.builder.outputs.id}}"
-          echo "UPLOAD URL = ${{steps.builder.outputs.upload_url}}"
-          echo "1 - ${GITHUB_REF##*/}"
-          echo "2 - ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)"
-          echo "3 - ${{ steps.get_version.outputs.VERSION }}"
-          echo 4 - ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-          echo 5 - ${GITHUB_REF/refs\/tags\//}
-          echo "6 - ${GITHUB_REF/refs\/tags\//}"
-       
+      #- name: Show
+        #run: |
+          #echo "TAG - ${GITHUB_REF##*/}"          
+          #echo "TAG - ${GITHUB_REF/refs\/tags\//}"
 
+      - name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      #- name: Login to DockerHub
-        #uses: docker/login-action@v1 
-        #with:
-          #username: ${{ secrets.DOCKERHUB_USERNAME }}
-          #password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      #- name: Build and Push to DockerHub
-        #uses: docker/build-push-action@v2
-        #with:
-          #push: true
-          #tags: ${{ env.DOCKERHUB_REPO }}:${{ steps.builder.tag_name }}
-
+      - name: Build and Push to DockerHub
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ env.DOCKERHUB_REPO }}:${GITHUB_REF/refs\/tags\//}
           
           
 
