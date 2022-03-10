@@ -5,7 +5,7 @@ on:
       - "v*.*.*"
 env:
   DOCKERHUB_REPO: maxirobledo/factutest
-  TAG: ${GITHUB_REF/refs\/tags\//}
+  #TAG: ${GITHUB_REF/refs\/tags\//}
 jobs:
   creator:
     runs-on: ubuntu-latest
@@ -16,12 +16,22 @@ jobs:
       - name: Build
         id: builder
         uses: softprops/action-gh-release@v1
-        
-      - name: Show
+
+      - name: Generator
+        id: gen_tags
         run: |
-          #echo "TAG - ${GITHUB_REF##*/}"          
-          echo "TAG - ${GITHUB_REF/refs\/tags\//}"
-          echo "ENV - ${{env.TAG}}"
+          if [[ $GITHUB_REF == 'refs/tags/'* ]]; then
+            TAGS='["user/image:latest","user/image:'${GITHUB_REF/refs\/tags\//}'"]'
+          else
+            TAGS='["user/image:latest"]'
+          fi
+          echo '::set-output name=tags::'$TAGS
+    
+      #- name: Show
+        #run: |
+          ##echo "TAG - ${GITHUB_REF##*/}"          
+          #echo "TAG - ${GITHUB_REF/refs\/tags\//}"
+          #echo "ENV - ${{env.TAG}}"
 
       - name: Login to DockerHub
         uses: docker/login-action@v1 
@@ -32,9 +42,9 @@ jobs:
       - name: Build and Push to DockerHub
         uses: docker/build-push-action@v2
         with:
+          context: .
           push: true
-          tags: ${{env.DOCKERHUB_REPO}}:$TAG
-          
-
-            
+          #tags: ${{env.DOCKERHUB_REPO}}:$TAG
+          tags: ${{ fromJson(steps.gen_tags.outputs.tags) }}
+    
      
