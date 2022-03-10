@@ -21,7 +21,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: maxirobledo/factutest
+          images: ${{env.DOCKERHUB_REPO}}
           tags: "${GITHUB_REF/refs\/tags\//}"
 
       - name: Login to DockerHub
