@@ -1,8 +1,6 @@
-name: CI
+name: CI - Auto
 on:
-  push:    
-    tags:
-      - "v*.*.*"
+   workflow_dispatch:
 env:
   DOCKERHUB_REPO: maxirobledo/factutest
   
