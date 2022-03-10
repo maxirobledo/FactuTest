@@ -22,13 +22,7 @@ jobs:
         uses: docker/metadata-action@v3
         with:
           images: maxirobledo/factutest
-          tags: ${GITHUB_REF/refs\/tags\//}
-    
-      #- name: Show
-        #run: |
-          ##echo "TAG - ${GITHUB_REF##*/}"          
-          #echo "TAG - ${GITHUB_REF/refs\/tags\//}"
-          #echo "ENV - ${{env.TAG}}"
+          tags: "${GITHUB_REF/refs\/tags\//}"
 
       - name: Login to DockerHub
         uses: docker/login-action@v1 
