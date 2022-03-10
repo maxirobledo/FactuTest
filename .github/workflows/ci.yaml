@@ -23,7 +23,7 @@ jobs:
         with:
           images: ${{env.DOCKERHUB_REPO}}
           #tags: ${GITHUB_REF/refs\/tags\//}
-          tags: GITHUB_REF/refs
+          tags: v0.1.0
 
 
       - name: Login to DockerHub
