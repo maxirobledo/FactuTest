@@ -26,7 +26,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         
-        #Verifica si el string rebuild se encuentra en el cuerpo del comentario
         if: contains(github.event.comment.body, 'rebuild')
       - name: Build and Push to DockerHub
         uses: docker/build-push-action@v2
