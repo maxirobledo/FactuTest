@@ -1,7 +1,7 @@
 name: Comment
 on:
   issue_comment:
-    - created
+    types: [created]
     
 env:
   DOCKERHUB_REPO: maxirobledo/factutest
