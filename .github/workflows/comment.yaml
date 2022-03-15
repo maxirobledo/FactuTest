@@ -5,6 +5,9 @@ on:
     
 #env:
   #DOCKERHUB_REPO: maxirobledo/factutest
+env:
+  BODY: ${{ github.event.comment.body }}
+  GITHUB_CONTEXT: $GITHUB_CONTEXT
 
 jobs:
   verify:
@@ -14,8 +17,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2   
         
-      - name: Verify        
-        run: echo "El comentario rebuild se encuentra"
+      - name: Verify       
+        run: | 
+          echo "El comentario rebuild se encuentra"          
+          echo "Body BODY"
+          echo "GITHUB CONTEXT  GITHUB_CONTEXT"
       
       #- name: Docker metadata
         #id: metadata
