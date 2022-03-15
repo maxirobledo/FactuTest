@@ -13,7 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2   
         
-        if: contains(github.event.comment.body, 'rebuild')
+        if: contains(github.event.comment.body, '/rebuild')
       - name: Verify
         run: echo "El comentario ${{ github.event.comment.body }}  se encuentra"
       
