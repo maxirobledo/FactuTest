@@ -3,11 +3,9 @@ on:
   issue_comment:
     types: [created, edited, deleted]
     
-#env:
-  #DOCKERHUB_REPO: maxirobledo/factutest
 env:
+  #DOCKERHUB_REPO: maxirobledo/factutest
   BODY: ${{ github.event.comment.body }}
-  GITHUB_CONTEXT: $GITHUB_CONTEXT
 
 jobs:
   verify:
@@ -21,7 +19,7 @@ jobs:
         run: | 
           echo "El comentario rebuild se encuentra"          
           echo "Body $BODY"
-          echo "GITHUB CONTEXT $GITHUB_CONTEXT"
+          echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       
       #- name: Docker metadata
         #id: metadata
