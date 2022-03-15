@@ -20,8 +20,8 @@ jobs:
       - name: Verify       
         run: | 
           echo "El comentario rebuild se encuentra"          
-          echo "Body BODY"
-          echo "GITHUB CONTEXT  GITHUB_CONTEXT"
+          echo "Body $BODY"
+          echo "GITHUB CONTEXT $GITHUB_CONTEXT"
       
       #- name: Docker metadata
         #id: metadata
