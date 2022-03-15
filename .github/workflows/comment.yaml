@@ -1,10 +1,10 @@
 name: Comment
 on:
   issue_comment:
-    types: [created]
+    types: [created, edited, deleted]
     
-env:
-  DOCKERHUB_REPO: maxirobledo/factutest
+#env:
+  #DOCKERHUB_REPO: maxirobledo/factutest
 
 jobs:
   verify:
@@ -13,9 +13,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2   
         
-        if: contains(github.event.comment.body, 'rebuild')
       - name: Verify
-        run: echo "El comentario ${{ github.event.comment.body }}  se encuentra"
+        if: contains(github.event.comment.body, '/rebuild')
+        run: echo "El comentario rebuild se encuentra"
       
       #- name: Docker metadata
         #id: metadata
