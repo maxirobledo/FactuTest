@@ -7,9 +7,9 @@ FactuTest es una app web de en lenguaje PHP que simula la compra de articulos y 
 ``` bash
 docker login
 
-docker build --no-cache -t maxirobledo/factutest:v0.8.0 .
+docker build --no-cache -t maxirobledo/factutest:v0.7.0 .
 
-docker push maxirobledo/factutest:v0.8.0
+docker push maxirobledo/factutest:v0.7.0
 ```
 
 2. Recrear orquestación de kubernetes: (tanto para la carpte db como en la carpeta app)
