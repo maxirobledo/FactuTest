@@ -1,32 +1,12 @@
 pipeline {
-  agent any
-  options {
-    buildDiscarder(logRotator(numToKeepStr: '5'))
-  }
-  environment {
-    DOCKERHUB_CREDENTIALS = credentials('DockerHub')
+  agent {
+    docker { image 'node:16-alpine' }
   }
   stages {
-    stage('Build') {
+    stage('Test') {
       steps {
-        sh 'docker build -t maxirobledo/factutest:latest .'
+        sh 'node --version'
       }
-    }
-    stage('Login') {
-      steps {
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW'
-        sh 'echo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-      }
-    }
-    stage('Push') {
-      steps {
-        sh 'docker push dmaxirobledo/factutest:latest'
-      }
-    }
-  }
-  post {
-    always {
-      sh 'docker logout'
     }
   }
 }
