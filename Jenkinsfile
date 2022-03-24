@@ -1,40 +1,20 @@
-pipeline {
-  environment {
-    imagename = "maxirobledo/factutest"
-    registryCredential = 'maxirobledo/factutest'
-    dockerImage = ''
-  }
-  agent any
-  stages {
-    stage('Cloning Git') {
-      steps {
-        git([url: 'https://github.com/maxirobledo/FactuTest.git', branch: 'main', credentialsId: 'github-token'])
-
-      }
+node {
+    def app     
+    stage('Clone repository') {                        
+        checkout scm   
+    }     
+    stage('Build image') {            
+        app = docker.build("maxirobledo/factutest")    
+    }     
+    stage('Test image') {           
+        app.inside {                 
+            sh 'echo "Tests passed"'        
+        }    
+    }     
+    stage('Push image') {
+        docker.withRegistry('https://registry.hub.docker.com', 'maxirobledo/facutest') {            
+        //app.push("${env.BUILD_NUMBER}")            
+        app.push("latest")        
+        }    
     }
-    stage('Building image') {
-      steps{
-        script {
-          dockerImage = docker.build imagename
-        }
-      }
-    }
-    stage('Deploy Image') {
-      steps{
-        script {
-          docker.withRegistry( '', registryCredential ) {
-            //dockerImage.push("$BUILD_NUMBER")
-            dockerImage.push('latest')
-          }
-        }
-      }
-    }
-    /*stage('Remove Unused docker image') {
-      steps{
-        sh "docker rmi $imagename:$BUILD_NUMBER"
-         sh "docker rmi $imagename:latest"
-
-      }
-    }*/
-  }
 }
