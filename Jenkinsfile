@@ -1,42 +1,40 @@
 pipeline {
-  agent any
   environment {
-    DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+    imagename = "maxirobledo/factutest"
+    registryCredential = 'maxirobledo/factutest'
+    dockerImage = ''
   }
+  agent any
   stages {
-    /*stage('Build') {
+    stage('Cloning Git') {
       steps {
-        sh 'docker build -t maxirobledo/factutest:latest .'
+        git([url: 'https://github.com/maxirobledo/FactuTest.git', branch: 'main', credentialsId: 'github-token'])
+
       }
     }
-    stage('Login') {
-      steps {
-        
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW'
-        sh 'docker login --username maxirobledo --password-stdin'
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build imagename
+        }
       }
     }
-    stage('Push') {
-      steps {
-        sh 'docker push maxirobledo/factutest:latest'
+    stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            //dockerImage.push("$BUILD_NUMBER")
+            dockerImage.push('latest')
+          }
+        }
+      }
+    }
+    /*stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $imagename:$BUILD_NUMBER"
+         sh "docker rmi $imagename:latest"
+
       }
     }*/
-    stage('Clone repository') {
-        checkout scm
-    }
-    stage('Build image') {
-       image = docker.build("maxirobledo/factutest")
-    }
-    stage('Push image') {    
-      docker.withRegistry('https://registry.hub.docker.com', 'roble1988') {
-        //app.push("${env.BUILD_NUMBER}")
-        image.push("latest")
-      }
-    }
   }
-  /*post {
-    always {
-      sh 'docker logout'
-    }
-  }*/
 }
