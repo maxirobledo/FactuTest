@@ -13,7 +13,7 @@ pipeline {
       steps {
         //Esto es un comentario
         sh 'echo $DOCKERHUB_CREDENTIALS_USR $DOCKERHUB_CREDENTIALS_PSW'
-        sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
+        sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
       }
     }
     stage('Push') {
