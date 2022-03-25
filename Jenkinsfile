@@ -17,7 +17,7 @@ pipeline {
       steps {
         //sh 'echo USUARIO = $USUARIO'
         sh 'echo $PASSWORD'        
-        sh 'docker login -u $USUARIO --password-stdin'
+        sh 'docker login -u $USUARIO --password-stdin dockerregistry.cloud.remote'
       }
     }
     stage('Push') {
