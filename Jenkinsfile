@@ -20,6 +20,7 @@ pipeline {
     }
     stage('Push') {
       steps {
+        sh 'push to dockerhub'
         //sh 'docker push maxirobledo/factutest:latest'
       }
     }
