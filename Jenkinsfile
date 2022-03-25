@@ -3,7 +3,7 @@ pipeline {
   environment {
     //DOCKERHUB_CREDENTIALS = credentials('DockerHub')
     USUARIO = credentials('DockerHub_USERNAME')
-    PASSWORD = credentials('DockerHub_PSW')
+    //PASSWORD = credentials('DockerHub_PSW')
   }
   stages {
     stage('Build') {
@@ -15,7 +15,7 @@ pipeline {
       steps {
         //sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
         sh 'echo USUARIO = $USUARIO'
-        sh 'echo PASSWORD = $PASSWORD'
+        //sh 'echo PASSWORD = $PASSWORD'
       }
     }
     stage('Push') {
