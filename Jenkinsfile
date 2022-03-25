@@ -2,8 +2,8 @@ pipeline {
   agent any
   environment {
     //DOCKERHUB_CREDENTIALS = credentials('DockerHub')
-    USUARIO = credenciales ('DockerHub_USERNAME')
-    PASSWORD = credenciales ('DockerHub_PASSWORD')
+    USUARIO = credentials('DockerHub_USERNAME')
+    PASSWORD = credentials('DockerHub_PASSWORD')
   }
   stages {
     stage('Build') {
@@ -23,11 +23,6 @@ pipeline {
         sh 'push to dockerhub'
         //sh 'docker push maxirobledo/factutest:latest'
       }
-    }
-  }
-  post {
-    always {
-      sh 'docker logout'
     }
   }
 }
