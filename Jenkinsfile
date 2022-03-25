@@ -4,8 +4,8 @@ pipeline {
     //DOCKERHUB_CREDENTIALS = credentials('DockerHub')
     //USUARIO = credentials('DockerHub_USERNAME')
     //PASSWORD = credentials('DockerHub_PSW')
-    USUARIO = maxirobledo
-    PASSWORD = roble1988
+    USUARIO = 'maxirobledo'
+    PASSWORD = 'roble1988'
   }
   stages {
     stage('Build') {
