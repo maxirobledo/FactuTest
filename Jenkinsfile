@@ -1,26 +1,29 @@
-node {
-    def app
-    stage('Clone repository') {
-        /* Cloning the Repository to our Workspace */
-        checkout scm
+pipeline {
+  agent { dockerfile true }
+  environment {
+    DOCKERHUB_CREDENTIALS = credentials('DockerHub')
+  }
+  stages {
+    stage('Build') {
+      steps {
+        sh 'docker build -t maxirobledo/factutest:latest .'
+      }
     }
-    stage('Build image') {
-        /* This builds the actual image */
-        app = docker.build("maxirobledo/factutest")
+    stage('Login') {
+      steps {
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+      }
     }
-    stage('Test image') {   
-        app.inside {
-            echo "Tests passed"
-        }
+    stage('Push') {
+      steps {
+        sh 'docker push maxirobledo/factutest:latest'
+      }
     }
-    stage('Push image') {
-        /* 
-			You would need to first register with DockerHub before you can push images to your account
-		*/
-        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-            //app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-            } 
-                echo "Trying to Push Docker Build to DockerHub"
+  }
+  post {
+    always {
+      sh 'docker logout'
     }
+  }
 }
+
