@@ -15,9 +15,9 @@ pipeline {
     }
     stage('Login') {
       steps {
-        /*sh 'echo USUARIO = $USUARIO'
-        sh 'echo PASSWORD = $PASSWORD'*/
-        sh 'docker login -u $USUARIO -p PASSWORD'
+        //sh 'echo USUARIO = $USUARIO'
+        sh 'echo $PASSWORD'        
+        sh 'docker login -u $USUARIO --password-stdin'
       }
     }
     stage('Push') {
