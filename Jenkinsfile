@@ -6,7 +6,7 @@ node {
     }
     //Verify tittle
     stage('Verify') {   
-        sh 'payload'
+        //sh 'payload'
     }
     stage('Build image') {
         /* This builds the actual image */
@@ -18,7 +18,7 @@ node {
 		*/
         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
             //app.push("${env.BUILD_NUMBER}")
-            //app.push("latest")
+            app.push("latest")
             } 
                 echo "Trying to Push Docker Build to DockerHub"
     }
