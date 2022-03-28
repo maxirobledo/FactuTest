@@ -4,14 +4,13 @@ node {
         /* Cloning the Repository to our Workspace */
         checkout scm
     }
+    //Verify tittle
+    stage('Verify') {   
+        sh 'printenv'
+    }
     stage('Build image') {
         /* This builds the actual image */
         app = docker.build("maxirobledo/factutest")
-    }
-    stage('Test image') {   
-        app.inside {
-            echo "Tests passed"
-        }
     }
     stage('Push image') {
         /* 
@@ -19,7 +18,7 @@ node {
 		*/
         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
             //app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
+            //app.push("latest")
             } 
                 echo "Trying to Push Docker Build to DockerHub"
     }
