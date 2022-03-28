@@ -6,7 +6,7 @@ node {
     }
     //Verify tittle
     stage('Verify') {   
-        sh 'printenv'
+        sh 'payload'
     }
     stage('Build image') {
         /* This builds the actual image */
