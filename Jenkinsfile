@@ -1,26 +1,15 @@
-node {
-    def app
-    stage('Clone repository') {
-        /* Cloning the Repository to our Workspace */
-        checkout scm
-    }
-    stage('Build image') {
-        /* This builds the actual image */
-        app = docker.build("maxirobledo/factutest")
-    }
-    stage('Test image') {   
-        app.inside {
-            echo "Tests passed"
+pipeline{
+    agent any
+    stages{
+        stage("build"){
+            echo "build"
+        }
+        stage("test"){
+            sleep 60
+        }
+        stage("deploy"){
+            echo "deploy"
         }
     }
-    stage('Push image') {
-        /* 
-			You would need to first register with DockerHub before you can push images to your account
-		*/
-        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-            //app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-            } 
-            echo "Trying to Push Docker Build to DockerHub"
-    }
+
 }
