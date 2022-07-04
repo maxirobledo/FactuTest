@@ -16,6 +16,7 @@ pipeline{
             }
         }   
 
+<<<<<<< HEAD
         stage('Initialize'){
             def dockerHome = tool 'myDocker'
             env.PATH = "${dockerHome}/bin:${env.PATH}"
@@ -24,6 +25,12 @@ pipeline{
         stage('Build image'){
             steps{
                 sh 'docker build -t maxirobledo/factutest:latest .'           
+=======
+        stage('Build image'){
+            steps{
+                sh 'node --version'
+                /*sh 'docker build -t maxirobledo/factutest:latest .'           
+>>>>>>> fdb78ffedeee0834ce759907577bb8d70cfe3645
                 echo 'Build Image Completed'  */
                 /*script{
                     dockerImage = docker.build("maxirobledo/factutest:latest")
