@@ -18,6 +18,7 @@ pipeline{
             steps{
                 script{
                     curl https://get.docker.com/ > dockerinstall && chmod 777 dockerinstall && ./dockerinstall
+                    sudo chmod 666 /var/run/docker.sock
                 }
             }
         }
