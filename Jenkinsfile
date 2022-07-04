@@ -2,21 +2,29 @@ pipeline{
     agent any
     
     stages{
+        stage('Clone repository') {
+            steps{
+                        checkout scm
+            }
+        }   
         stage("build"){
             steps{
                 echo "build"
             }
         }
-        stage("test"){
+        stage('Build image') {
             steps{
-                echo "test"
+                app = docker.build("maxirobledo/factutest")
             }
         }
-        stage("deploy"){
+        stage('Push image') {
             steps{
-                echo "deploy"
-            }
-        }
+                docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                //app.push("${env.BUILD_NUMBER}")
+                app.push("latest")
+                } 
+            }            
+        }   
     }
 
 }
