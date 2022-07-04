@@ -1,5 +1,5 @@
 # FactuTest
-FactuTest es una app web en lenguaje PHP que simula la compra de articulos y emisión de una factura.
+FactuTest es una app web desarrollada en lenguaje PHP que simula la compra de articulos y emisión de una factura.
 
 ## Instalación
 
