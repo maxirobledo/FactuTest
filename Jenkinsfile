@@ -9,13 +9,11 @@ pipeline{
     }
 
     stages{
-
         stage('Clone repository'){
             steps{
                 checkout scm
             }
         }   
-
         stage('Initialize'){
             steps{
                 script{
@@ -24,28 +22,16 @@ pipeline{
                 }
             }
         }
-
         stage('Build image'){
             steps{
                 sh 'docker build -t maxirobledo/factutest:latest .'           
             }
-        }
-        
-        stage('Build image'){
-            steps{            
-                echo 'Build Image Completed'
-                /*script{
-                    dockerImage = docker.build("maxirobledo/factutest:latest")
-                }*/
-            }
-        }
-        
+        }        
         /*stage('Docker login'){
             steps{
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u DOCKERHUB_CREDENTIALS_USR --password-stdin'           
             }
         }
-        
         stage('Push image'){
             steps{
                 script{
