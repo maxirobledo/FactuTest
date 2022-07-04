@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This deployment ensures that the continuous integration process is executed when a dev commit to any feature branch is performed. This allows a pipeline to be activated on the current instance of jenkins. The pipeline build the project and sends the image to DockerHub.
+This deployment ensures that the continuous integration process is executed when a any developer commit to any feature branch. This allows a pipeline to be activated on the current instance of jenkins. The pipeline build the project and push the image to DockerHub.
 Finally the developer is notified through a slack channel.
 
 ![flow](./images/flow.png)
