@@ -27,7 +27,7 @@ pipeline{
 
         stage('Build image'){
             steps{
-                sh 'sudo docker build -t maxirobledo/factutest:latest .'           
+                sh 'docker build -t maxirobledo/factutest:latest .'           
                 echo 'Build Image Completed'  
                 /*script{
                     dockerImage = docker.build("maxirobledo/factutest:latest")
