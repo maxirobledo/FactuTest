@@ -4,14 +4,9 @@ pipeline{
     stages{
         stage('Clone repository') {
             steps{
-                        checkout scm
+                checkout scm
             }
         }   
-        stage("build"){
-            steps{
-                echo "build"
-            }
-        }
         stage('Build image') {
             steps{
                 app = docker.build("maxirobledo/factutest")
