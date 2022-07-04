@@ -28,7 +28,7 @@
         
         echo "<table borde='2'>";
                 echo "<tr>";
-                echo "<th>Código</th>";
+                echo "<th>Código de producto</th>";
                 echo "<th>Descripción</th>";
                 echo "<th>Cantidad</th>";
                 echo "<th>Precio unitario</th>";
