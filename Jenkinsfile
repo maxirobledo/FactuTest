@@ -5,6 +5,7 @@ pipeline{
         //registry = "gustavoapolinario/docker-test"
         //registryCredential = 'dockerhub'
         dockerImage = ''
+        dockerHome = ''
     }
 
     stages{
@@ -15,10 +16,17 @@ pipeline{
             }
         }   
         
+        stage('Initialize'){
+            steps{
+                dockerHome = tool 'docker'
+                env.PATH = "${dockerHome}/bin:${env.PATH}"
+            }
+        }
+
         stage('Build image'){
             steps{
                 script{
-                    dockerImage = docker.build("maxirobledo/factutest")
+                    dockerImage = docker.build("maxirobledo/factutest:latest")
                 }
             }
         }
