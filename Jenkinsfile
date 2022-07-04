@@ -1,28 +1,20 @@
 pipeline{
-    agent {
-        dockerfile true
-    }
+    agent any
     
-    /*environment{
+    environment{
         //registry = "gustavoapolinario/docker-test"
         //registryCredential = 'dockerhub'
         dockerImage = ''
         //dockerHome = ''
-    }*/
+    }
 
     stages{
 
-        stage('Test') {
-            steps {
-                sh 'node --version'
-            }
-        }
-
-        /*stage('Clone repository'){
+        stage('Clone repository'){
             steps{
                 checkout scm
             }
-        } */  
+        }   
         
         /*stage('Initialize'){
             steps{
@@ -33,11 +25,13 @@ pipeline{
             }
         }*/
 
-        /*stage('Build image'){
+        stage('Build image'){
             steps{
-                script{
+                sh 'sudo docker build -t maxirobledo/factutest:latest .'           
+                echo 'Build Image Completed'  
+                /*script{
                     dockerImage = docker.build("maxirobledo/factutest:latest")
-                }
+                }*/
             }
         }
         
@@ -50,7 +44,7 @@ pipeline{
                     }
                 } 
             }            
-        } */
+        } 
     }
 
 }
