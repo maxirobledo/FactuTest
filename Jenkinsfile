@@ -4,7 +4,7 @@ pipeline{
     environment {
         //registry = "gustavoapolinario/docker-test"
         //registryCredential = 'dockerhub'
-        dockerImage = ''
+        //dockerImage = ''
     }
 
     stages{
@@ -17,13 +17,17 @@ pipeline{
         
         stage('Build image') {
             steps{
-                script{
+                /*script{
                     dockerImage = docker.build("maxirobledo/factutest")
+                }*/
+                script {
+                    def customImage = docker.build("maxirobledo/factutest:latest")
+                    customImage.push()
                 }
             }
         }
         
-        stage('Push image') {
+        /*stage('Push image') {
             steps{
                 script{
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
@@ -32,7 +36,7 @@ pipeline{
                     }
                 } 
             }            
-        }   
+        } */  
     }
 
 }
