@@ -1,13 +1,13 @@
 pipeline{
     agent any
     
+    environment {
+        //registry = "gustavoapolinario/docker-test"
+        //registryCredential = 'dockerhub'
+        dockerImage = ''
+    }
+
     stages{
-        
-        environment {
-            //registry = "gustavoapolinario/docker-test"
-            //registryCredential = 'dockerhub'
-            dockerImage = ''
-        }
 
         stage('Clone repository') {
             steps{
