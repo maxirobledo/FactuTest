@@ -1,20 +1,28 @@
 pipeline{
-    agent any
+    agent {
+        docker { image 'node:16.13.1-alpine' }
+    }
     
-    environment{
+    /*environment{
         //registry = "gustavoapolinario/docker-test"
         //registryCredential = 'dockerhub'
         dockerImage = ''
         //dockerHome = ''
-    }
+    }*/
 
     stages{
 
-        stage('Clone repository'){
+        stage('Test') {
+            steps {
+                sh 'node --version'
+            }
+        }
+
+        /*stage('Clone repository'){
             steps{
                 checkout scm
             }
-        }   
+        } */  
         
         /*stage('Initialize'){
             steps{
@@ -25,7 +33,7 @@ pipeline{
             }
         }*/
 
-        stage('Build image'){
+        /*stage('Build image'){
             steps{
                 script{
                     dockerImage = docker.build("maxirobledo/factutest:latest")
@@ -42,7 +50,7 @@ pipeline{
                     }
                 } 
             }            
-        } 
+        } */
     }
 
 }
