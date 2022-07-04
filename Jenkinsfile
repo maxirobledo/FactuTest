@@ -26,6 +26,10 @@ pipeline{
         }*/
 
         stage('Build image'){
+            agent {
+                dockerfile {
+                    filename 'Dockerfile.txt'
+                }
             steps{
                 sh 'docker build -t maxirobledo/factutest:latest .'           
                 echo 'Build Image Completed'  
