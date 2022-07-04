@@ -1,47 +1,21 @@
-pipeline{
-    agent any
-    /*agent {
-        docker { image 'node:16.13.1-alpine' }
-    }*/
-    
-    environment{
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+node {
+    def app
+    stage('Clone repository') {
+        /* Cloning the Repository to our Workspace */
+        checkout scm
     }
-
-    stages{
-        stage('Clone repository'){
-            steps{
-                checkout scm
-            }
-        }   
-        stage('Install'){
-            steps{
-                sh 'wget https://get.docker.com/ > dockerinstall && chmod 777 dockerinstall && ./dockerinstall'
-                sh 'sudo chmod 666 /var/run/docker.sock'
-            }
-        }
-        stage('Build image'){
-            steps{
-                sh 'docker build -t maxirobledo/factutest:latest .'           
-            }
-        }        
-        
-        stage('Docker login'){
-            steps{
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u DOCKERHUB_CREDENTIALS_USR --password-stdin'           
-            }
-        }
-
-        stage('Push image'){
-            steps{
-                script{
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                        //app.push("${env.BUILD_NUMBER}")
-                        dockerImage.push("latest")
-                    }
-                } 
-            }            
-        } 
+    stage('Build image') {
+        /* This builds the actual image */
+        app = docker.build("maxirobledo/factutest")
     }
-
+    stage('Push image') {
+        /* 
+			You would need to first register with DockerHub before you can push images to your account
+		*/
+        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+            //app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
+            } 
+                echo "Trying to Push Docker Build to my DockerHub"
+    }
 }
