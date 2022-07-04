@@ -3,6 +3,12 @@ pipeline{
     
     stages{
         
+        environment {
+            //registry = "gustavoapolinario/docker-test"
+            //registryCredential = 'dockerhub'
+            dockerImage = ''
+        }
+
         stage('Clone repository') {
             steps{
                 checkout scm
@@ -12,7 +18,7 @@ pipeline{
         stage('Build image') {
             steps{
                 script{
-                    app = docker.build("maxirobledo/factutest")
+                    dockerImage = docker.build("maxirobledo/factutest")
                 }
             }
         }
@@ -22,7 +28,7 @@ pipeline{
                 script{
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                         //app.push("${env.BUILD_NUMBER}")
-                        app.push("latest")
+                        dockerImage.push("latest")
                     }
                 } 
             }            
