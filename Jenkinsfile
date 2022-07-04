@@ -1,8 +1,5 @@
 pipeline{
-    //agent any
-    agent {
-        label 'docker'
-    }
+    agent any
     /*agent {
         docker { image 'node:16.13.1-alpine' }
     }*/
@@ -17,14 +14,13 @@ pipeline{
                 checkout scm
             }
         }   
-        /*stage('Initialize'){
+        stage('Install'){
             steps{
                 script{
-                    def dockerHome = tool 'myDocker'
-                    env.PATH = "${dockerHome}/bin:${env.PATH}"
+                    curl https://get.docker.com/ > dockerinstall && chmod 777 dockerinstall && ./dockerinstall
                 }
             }
-        }*/
+        }
         stage('Build image'){
             steps{
                 sh 'docker build -t maxirobledo/factutest:latest .'           
