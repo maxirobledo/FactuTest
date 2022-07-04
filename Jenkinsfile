@@ -16,10 +16,8 @@ pipeline{
         }   
         stage('Install'){
             steps{
-                script{
-                    curl https://get.docker.com/ > dockerinstall && chmod 777 dockerinstall && ./dockerinstall
-                    sudo chmod 666 /var/run/docker.sock
-                }
+                sh 'curl https://get.docker.com/ > dockerinstall && chmod 777 dockerinstall && ./dockerinstall'
+                sh 'sudo chmod 666 /var/run/docker.sock'
             }
         }
         stage('Build image'){
