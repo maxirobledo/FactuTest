@@ -1,0 +1,14 @@
+name: Hello world
+on:
+  pull_request:
+    types: 
+      - opened 
+      - reopened
+    
+jobs:
+  saludar:
+    runs-on: ubuntu-latest
+    steps:       
+      - run: |
+          echo "Hello world!!"
+          echo "Today is $(date)"

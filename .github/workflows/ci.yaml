@@ -1,0 +1,44 @@
+name: CI
+on:
+  push:    
+    tags:
+      - "v*.*.*"
+env:
+  DOCKERHUB_REPO: maxirobledo/factutest
+  
+jobs:
+  creator:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2      
+
+      - name: Build to Github
+        id: builder
+        uses: softprops/action-gh-release@v1
+
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+
+      - name: Docker metadata
+        id: metadata
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{env.DOCKERHUB_REPO}}        
+          tags: ${{ steps.get_version.outputs.VERSION }}
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and Push to DockerHub
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true          
+          tags: ${{ steps.metadata.outputs.tags }}
+    
+     

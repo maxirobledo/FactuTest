@@ -1,0 +1,48 @@
+name: CI - Auto
+on:
+   workflow_dispatch:
+env:
+  DOCKERHUB_REPO: maxirobledo/factutest
+  
+jobs:
+  creator:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2      
+
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.0
+        with:          
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          default_bump: minor
+
+      - name: Create a GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
+
+      - name: Docker metadata
+        id: metadata
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{env.DOCKERHUB_REPO}}        
+          tags: ${{ steps.tag_version.outputs.new_tag }}
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and Push to DockerHub
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true          
+          tags: ${{ steps.metadata.outputs.tags }}
+    
+     

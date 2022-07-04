@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: php-ingress
+  namespace: testing
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+    #kubernetes.io/tls-acme: "true"
+    #nginx.ingress.kubernetes.io/auth-url: "https://test.snappypreview.com/oauth2/auth"
+    #nginx.ingress.kubernetes.io/auth-signin: "https://test.snappypreview.com/oauth2/start?rd=$escaped_request_uri"
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+        - path: /test
+          pathType: Prefix
+          backend:
+            service:
+              name: php-service
+              port: 
+                #number: 80
+                number: 5678
+        #- path: /v2
+          #pathType: Prefix
+          #backend:
+            #service:
+              #name: php-service2
+              #port: 
+                #number: 8080
+
+                
