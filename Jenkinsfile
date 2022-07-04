@@ -16,7 +16,7 @@ pipeline{
         }   
         stage('Install'){
             steps{
-                sh 'curl https://get.docker.com/ > dockerinstall && chmod 777 dockerinstall && ./dockerinstall'
+                sh 'wget https://get.docker.com/ > dockerinstall && chmod 777 dockerinstall && ./dockerinstall'
                 sh 'sudo chmod 666 /var/run/docker.sock'
             }
         }
