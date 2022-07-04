@@ -5,17 +5,15 @@ node {
         checkout scm
     }
     stage('Build image') {
-        /* This builds the actual image */
-        app = docker.build("maxirobledo/factutest")
+        //app = docker.build("maxirobledo/factutest")
+        def newApp = docker.build "maxirobledo/factutes:latest"
+        newApp.push()
     }
-    stage('Push image') {
-        /* 
-			You would need to first register with DockerHub before you can push images to your account
-		*/
+    /*stage('Push image') {
         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
             //app.push("${env.BUILD_NUMBER}")
             app.push("latest")
             } 
                 echo "Trying to Push Docker Build to my DockerHub"
-    }
+    }*/
 }
