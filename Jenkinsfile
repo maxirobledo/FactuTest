@@ -1,11 +1,11 @@
 pipeline{
     agent any
     
-    environment {
+    /*environment{
         //registry = "gustavoapolinario/docker-test"
         //registryCredential = 'dockerhub'
         //dockerImage = ''
-    }
+    }*/
 
     stages{
 
