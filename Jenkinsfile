@@ -9,7 +9,9 @@ pipeline{
         }   
         stage('Build image') {
             steps{
-                app = docker.build("maxirobledo/factutest")
+                script {
+                    def app = docker.build("maxirobledo/factutest")
+                }
             }
         }
         stage('Push image') {
