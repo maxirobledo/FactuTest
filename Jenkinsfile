@@ -14,24 +14,26 @@ pipeline{
                 checkout scm
             }
         }   
-        stage('Initialize'){
+        /*stage('Initialize'){
             steps{
                 script{
                     def dockerHome = tool 'myDocker'
                     env.PATH = "${dockerHome}/bin:${env.PATH}"
                 }
             }
-        }
+        }*/
         stage('Build image'){
             steps{
                 sh 'docker build -t maxirobledo/factutest:latest .'           
             }
         }        
-        /*stage('Docker login'){
+        
+        stage('Docker login'){
             steps{
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u DOCKERHUB_CREDENTIALS_USR --password-stdin'           
             }
         }
+
         stage('Push image'){
             steps{
                 script{
@@ -41,7 +43,7 @@ pipeline{
                     }
                 } 
             }            
-        } */
+        } 
     }
 
 }
