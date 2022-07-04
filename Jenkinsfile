@@ -5,7 +5,7 @@ pipeline{
         //registry = "gustavoapolinario/docker-test"
         //registryCredential = 'dockerhub'
         dockerImage = ''
-        dockerHome = ''
+        //dockerHome = ''
     }
 
     stages{
@@ -16,14 +16,14 @@ pipeline{
             }
         }   
         
-        stage('Initialize'){
+        /*stage('Initialize'){
             steps{
                 script{
                     dockerHome = tool "docker"
                     env.PATH = "${dockerHome}/bin:${env.PATH}"
                 }
             }
-        }
+        }*/
 
         stage('Build image'){
             steps{
