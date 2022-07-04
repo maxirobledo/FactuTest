@@ -1,6 +1,8 @@
 pipeline{
     //agent any
-    agent{ dockerfile true }
+    agent {
+        docker { image 'node:16.13.1-alpine' }
+    }
     
     environment{
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
@@ -16,15 +18,16 @@ pipeline{
 
         stage('Build image'){
             steps{
-                sh 'docker build -t maxirobledo/factutest:latest .'           
-                echo 'Build Image Completed'  
+                sh 'node --version'
+                /*sh 'docker build -t maxirobledo/factutest:latest .'           
+                echo 'Build Image Completed'  */
                 /*script{
                     dockerImage = docker.build("maxirobledo/factutest:latest")
                 }*/
             }
         }
         
-        stage('Docker login'){
+        /*stage('Docker login'){
             steps{
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u DOCKERHUB_CREDENTIALS_USR --password-stdin'           
             }
@@ -39,7 +42,7 @@ pipeline{
                     }
                 } 
             }            
-        } 
+        } */
     }
 
 }
