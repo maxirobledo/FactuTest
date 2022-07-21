@@ -31,13 +31,13 @@ pipeline{
     }
     post {
         always {
-		    sh 'docker logout'
-		}
+            sh 'docker logout'
+        }
         failure{
             slackSend color: 'danger', message: ":x: ${env.JOB_NAME} - #${env.BUILD_NUMBER} Failure (<${env.BUILD_URL}|Open>)"
         }
         success{
             slackSend color: 'good', message: 'Se publicó exitosamente la imagen de la app'
         }
-	}
+    }
 }
