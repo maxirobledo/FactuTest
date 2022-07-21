@@ -24,14 +24,14 @@ pipeline{
         stage('Push image'){
             steps{
                 script{                                        
-                    sh 'docker puh maxirobledo/factutest:0.6.1'
+                    sh 'docker push maxirobledo/factutest:0.6.1'
                 }
             } 
         }            
     }
     post {
         always {
-			sh 'docker logout'
+		    sh 'docker logout'
 		}
         failure{
             slackSend color: 'danger', message: ":x: ${env.JOB_NAME} - #${env.BUILD_NUMBER} Failure (<${env.BUILD_URL}|Open>)"
