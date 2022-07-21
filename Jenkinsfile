@@ -19,23 +19,25 @@ pipeline{
         }*/
         stage('Build image'){
             steps{
-                sh 'docker build -t maxirobledo/factutest:latest .'           
+                //sh 'docker build -t maxirobledo/factutest:latest .' 
+                echo "build app"          
             }
         }        
         stage('Docker login'){
             steps{
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u DOCKERHUB_CREDENTIALS_USR --password-stdin'           
+                //sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u DOCKERHUB_CREDENTIALS_USR --password-stdin'          
+                echo "login" 
             }
         }
         stage('Push image'){
             steps{
-                script{
+                echo "push image"
+                /*script{                    
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                         //app.push("${env.BUILD_NUMBER}")
                         dockerImage.push("latest")
-                    }
-                } 
-            }            
-        } 
+                }*/
+            } 
+        }            
     }
 }
