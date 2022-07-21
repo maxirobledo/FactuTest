@@ -25,9 +25,6 @@ pipeline{
             steps{
                 script{                                        
                     sh 'docker push maxirobledo/factutest:0.6.1'
-                    /*docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                        //app.push("${env.BUILD_NUMBER}")
-                        dockerImage.push("latest")*/
                 }
             } 
         }            
@@ -35,6 +32,7 @@ pipeline{
     post {
 		always {
 			sh 'docker logout'
+            slackSend message: 'Se publicó exitosamente la imagen de la app'
 		}
 	}
 }
