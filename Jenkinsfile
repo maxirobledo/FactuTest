@@ -24,13 +24,13 @@ pipeline{
         stage('Push image'){
             steps{
                 script{                                        
-                    sh 'docker push maxirobledo/factutest:0.6.1'
+                    sh 'docker puh maxirobledo/factutest:0.6.1'
                 }
             } 
         }            
     }
     post {
-		always {
+        always {
 			sh 'docker logout'
 		}
         failure{
