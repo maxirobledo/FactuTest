@@ -13,7 +13,7 @@ pipeline{
         }   
         stage('Build image'){
             steps{
-                sh 'docker build -t maxirobledo/factutest:0.6.0 .'           
+                sh 'docker build -t maxirobledo/factutest:0.6.1 .'           
             }
         }        
         stage('Docker login'){
@@ -23,13 +23,18 @@ pipeline{
         }
         stage('Push image'){
             steps{
-                echo "push image"
-                /*script{                    
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                script{                                        
+                    sh 'docker push maxirobledo/factutest:0.6.1'
+                    /*docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                         //app.push("${env.BUILD_NUMBER}")
-                        dockerImage.push("latest")
-                }*/
+                        dockerImage.push("latest")*/
+                }
             } 
         }            
     }
+    post {
+		always {
+			sh 'docker logout'
+		}
+	}
 }
