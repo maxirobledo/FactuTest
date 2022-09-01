@@ -13,7 +13,7 @@ pipeline{
         }   
         stage('Build image'){
             steps{
-                sh 'docker build -t maxirobledo/factutest:0.6.2 .'           
+                sh 'docker build -t maxirobledo/factutest:0.6.3 .'           
             }
         }        
         stage('Docker login'){
@@ -24,7 +24,7 @@ pipeline{
         stage('Push image'){
             steps{
                 script{                                        
-                    sh 'docker push maxirobledo/factutest:0.6.2'
+                    sh 'docker push maxirobledo/factutest:0.6.3'
                 }
             } 
         }            
