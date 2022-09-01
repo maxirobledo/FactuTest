@@ -13,7 +13,7 @@ pipeline{
         }   
         stage('Build image'){
             steps{
-                sh 'docker build -t maxirobledo/factutest:0.6.1 .'           
+                sh 'docker build -t maxirobledo/factutest:0.6.2 .'           
             }
         }        
         stage('Docker login'){
@@ -29,7 +29,7 @@ pipeline{
             } 
         }            
     }
-    post {
+    /*post {
         always {
             sh 'docker logout'
         }
@@ -39,5 +39,5 @@ pipeline{
         success{
             slackSend color: 'good', message: 'Se publicó exitosamente la imagen de la app'
         }
-    }
+    }*/
 }
